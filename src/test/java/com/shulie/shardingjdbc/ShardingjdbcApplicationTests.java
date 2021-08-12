@@ -2,8 +2,10 @@ package com.shulie.shardingjdbc;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.shulie.shardingjdbc.entity.Course;
+import com.shulie.shardingjdbc.entity.Udict;
 import com.shulie.shardingjdbc.entity.User;
 import com.shulie.shardingjdbc.mapper.CourseMapper;
+import com.shulie.shardingjdbc.mapper.DictMapper;
 import com.shulie.shardingjdbc.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +22,9 @@ class ShardingjdbcApplicationTests {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private DictMapper dictMapper;
 
     @Test
     public void addCourse() {
@@ -57,5 +62,20 @@ class ShardingjdbcApplicationTests {
         user.setUserName("testUser");
         user.setUserStatus("1");
         userMapper.insert(user);
+    }
+
+    @Test
+    public void addDict(){
+        Udict udict = new Udict();
+        udict.setDictName("testDict");
+        udict.setDictStatus("1");
+        dictMapper.insert(udict);
+    }
+
+    @Test
+    public void deleteDict(){
+        QueryWrapper<Udict> wrapper = new QueryWrapper<>();
+        wrapper.eq("dict_id","628991562969251841");
+        dictMapper.delete(wrapper);
     }
 }
